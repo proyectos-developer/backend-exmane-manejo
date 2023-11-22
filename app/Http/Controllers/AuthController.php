@@ -27,9 +27,11 @@ class AuthController extends Controller
             'password' => Hash::make($post_data['password']),
         ]);
         $token = $user->createToken('authToken')->plainTextToken;
+        $usuario = User::where('email', '=', $post_data['email'])->first();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'usuario' => $usuario
         ]);
     }
 
@@ -41,9 +43,11 @@ class AuthController extends Controller
         }
         $user = User::where('email', $request['email'])->firstOrFail();
         $token = $user->createToken('authToken')->plainTextToken;
+        $usuario = User::where('email', '=', $request['email'])->first();
         return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
+                'usuario' => $usuario
         ]);
     }
 
@@ -118,5 +122,11 @@ class AuthController extends Controller
 
         // Devolvemos al formulario de login (devolvera un 404 puesto que no existe la ruta)
         return redirect('/login')->with('message', 'Tu contraseña se ha cambiado correctamente');
+    }
+
+    public function obtener_usuario($email)
+    {
+        $usuario = User::where('email', '=', $email)->first();
+        return(compact('usuario'));
     }
 }
