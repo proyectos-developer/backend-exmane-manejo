@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriaMototaxesController;
 use App\Http\Controllers\CategoriaCamionesController;
 use App\Http\Controllers\CategoriaBusesController;
 use App\Http\Controllers\CategoriaCamionetasController;
+use App\Http\Controllers\RespuestasUsuariosController;
 use App\Http\Controllers\ForgetPasswordManager;
 
 /**|--------------------------------------------------------------------------
@@ -79,3 +80,7 @@ Route::get('/preguntas_categoria_cinco/{id}', [CategoriaCamionetasController::cl
 Route::get('/preguntas_categoria_cinco/actualizar/{id}', [CategoriaCamionetasController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
 Route::delete('/preguntas_categoria_cinco/eliminar/{id}', [CategoriaCamionetasController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
 
+/**Ruta para guardar respuesta */
+Route::post('/respuesta/store', [RespuestasUsuariosController::class, 'crear_respuesta'])->name('respuesta.crear_respuesta');
+Route::get('/respuesta/{id}', [RespuestasUsuariosController::class, 'obtener_respuesta'])->name('respuesta.obtener_respuesta');
+Route::get('/respuesta/actualizar/{id}/{respuesta_usuario}/{correcta_usuario}', [RespuestasUsuariosController::class, 'actualizar_respuestas'])->name('respuesta.actualizar_respuestas');
