@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\CategoriaMotoLinealsController;
 use App\Http\Controllers\CategoriaMototaxesController;
 use App\Http\Controllers\CategoriaCamionesController;
@@ -45,7 +47,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/usuario/{email}', [AuthController::class, 'obtener_usuario'])->name('usuario.obtener_usuario');
+Route::get('/usuario/{email}', [UserController::class, 'obtener_usuario'])->name('usuario.obtener_usuario');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria uno
 Route::get('/preguntas_categoria_uno', [CategoriaMotoLinealsController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
