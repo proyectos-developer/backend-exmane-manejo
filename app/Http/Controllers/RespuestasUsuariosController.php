@@ -109,8 +109,10 @@ class RespuestasUsuariosController extends Controller
             $respuesta->nro_incorrectas = $request->post('nro_incorrectas');
 
         $respuesta->save();
+        $respuestas = RespuestasUsuarios::where('email', '=', $request->post('email'))->orderBy('created_at', 'desc')->first();
         return response()->json([
-            'success' => true
+            'success' => true,
+            'respuetas' => $respuestas
         ]);      
     }
 
@@ -135,7 +137,7 @@ class RespuestasUsuariosController extends Controller
         $respuesta->nro_incorrectas    = $request->post('nro_incorrectas');
 
         $respuesta->save();
-        
+
         return response()->json([
             'success' => true
         ]);      
