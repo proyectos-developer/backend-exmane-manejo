@@ -129,14 +129,16 @@ class RespuestasUsuariosController extends Controller
     {
         $respuesta = RespuestasUsuarios::find($id);
 
-        $respuesta->$respuesta_usuario          = $request->post('respuesta');
-        $respuesta->$correcta_usuario           = $request->post('correcta');
+        $respuesta->$respuesta_usuario = $request->post('respuesta');
+        $respuesta->$correcta_usuario  = $request->post('correcta');
         $respuesta->nro_correctas      = $request->post('nro_correctas');
         $respuesta->nro_incorrectas    = $request->post('nro_incorrectas');
 
         $respuesta->save();
-
-        return with("successs");
+        
+        return response()->json([
+            'success' => true
+        ]);      
     }
 
     public function eliminar_respuesta($id)
