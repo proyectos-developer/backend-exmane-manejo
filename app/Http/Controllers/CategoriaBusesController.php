@@ -33,7 +33,7 @@ class CategoriaBusesController extends Controller
         $pregunta->respuesta     = $request->post('respuesta');
 
         $pregunta->save();
-        return with("successs");
+        return (compact("pregunta"));  
     }
 
     public function show(CategoriaBuses $categoriaBuses)

@@ -11,8 +11,6 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
-
-
 class AuthController extends Controller
 {
     public function register(Request $request){
