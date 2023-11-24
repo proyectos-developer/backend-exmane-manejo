@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\CategoriaMotoLinealsController;
-use App\Http\Controllers\CategoriaMototaxesController;
+use App\Http\Controllers\CategoriaMotoTaxesController;
 use App\Http\Controllers\CategoriaCamionesController;
 use App\Http\Controllers\CategoriaBusesController;
 use App\Http\Controllers\CategoriaCamionetasController;
