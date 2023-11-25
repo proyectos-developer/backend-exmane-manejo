@@ -66,4 +66,9 @@ class EscuelaManejoController extends Controller
         
         return with("successs");
     }
+
+    public function buscar_por_distrito($search){
+        $escuelas_manejo = EscuelasManejo::where('ubicacion', '=', $search)->get();
+        return(compact('escuelas_manejo'));
+    }
 }

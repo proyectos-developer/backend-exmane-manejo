@@ -66,4 +66,9 @@ class ClinicasController extends Controller
         
         return with("successs");
     }
+
+    public function buscar_por_distrito($search){
+        $clinicas = Clinicas::where('ubicacion', '=', $search)->get();
+        return(compact('clinicas'));
+    }
 }
