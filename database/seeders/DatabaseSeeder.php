@@ -8,13 +8,36 @@ use App\Models\CategoriaCamionetas;
 use App\Models\CategoriaBuses;
 use App\Models\CategoriaCamiones;
 use App\Models\RespuestasUsuarios;
+use App\Models\Clinicas;
+use App\Models\EscuelasManejo;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+    
+    /**public function run(): void
+    {
+        Clinicas::create([ 
+            'nombre' => 'Clínica 1',
+            'logo' => '0',
+            'telefono' => "968169584",
+            'costo' => "120.00",
+        ]);
+    }**/
+    
     public function run(): void
+    {
+        EscuelasManejo::create([ 
+            'nombre' => 'Escuela 1',
+            'logo' => '0',
+            'telefono' => "968169584",
+            'costo' => "150.00",
+        ]);
+    }
+
+    /**public function run(): void
     {
         RespuestasUsuarios::create([ 
             'email' => 'j.portocarrero.jp@gmail.com',
@@ -102,7 +125,8 @@ class DatabaseSeeder extends Seeder
             'nro_correctas' => 35,
             'nro_incorrectas' => 5
         ]);
-    }
+    }**/
+
     /**public function run(): void
     {
         CategoriaCamiones::create([ 

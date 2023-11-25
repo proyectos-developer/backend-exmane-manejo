@@ -9,7 +9,8 @@ use App\Http\Controllers\CategoriaMotoTaxesController;
 use App\Http\Controllers\CategoriaCamionesController;
 use App\Http\Controllers\CategoriaBusesController;
 use App\Http\Controllers\CategoriaCamionetasController;
-use App\Http\Controllers\RespuestasUsuariosController;
+use App\Http\Controllers\EscuelaManejoController;
+use App\Http\Controllers\ClinicasController;
 use App\Http\Controllers\ForgetPasswordManager;
 
 /**|--------------------------------------------------------------------------
@@ -79,6 +80,16 @@ Route::post('/preguntas_categoria_cinco/store', [CategoriaCamionetasController::
 Route::get('/preguntas_categoria_cinco/{id}', [CategoriaCamionetasController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
 Route::get('/preguntas_categoria_cinco/actualizar/{id}', [CategoriaCamionetasController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
 Route::delete('/preguntas_categoria_cinco/eliminar/{id}', [CategoriaCamionetasController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+
+/**Ruta para guardar, actualizar y obtener lista de clinicas para exámen médico */
+Route::get('/clinicas', [ClinicasController::class, 'obtener_clinicas'])->name('clinica.obtener_clinicas');
+Route::post('/clinica/store', [ClinicasController::class, 'crear_clinica'])->name('clinica.crear_clinica');
+Route::get('/clinica/actualizar/{id}', [ClinicasController::class, 'actualizar_clinica'])->name('clinica.actualizar_clinica');
+
+/**Ruta para guardar, actualizar y obtener lista de clinicas para escuelas de manejo */
+Route::get('/escuelas_manejo', [EscuelaManejoController::class, 'obtener_escuelas_manejo'])->name('escuelas.obtener_escuelas_manejo');
+Route::post('/escuelas_manejo/store', [EscuelaManejoController::class, 'crear_escuela_manejo'])->name('escuelas.crear_escuela_manejo');
+Route::get('/escuelas_manejo/actualizar/{id}', [EscuelaManejoController::class, 'actualizar_escuela_manejo'])->name('escuelas.actualizar_escuela_manejo');
 
 /**Ruta para guardar respuesta */
 Route::post('/respuesta/store', [RespuestasUsuariosController::class, 'crear_respuesta'])->name('respuesta.crear_respuesta');
