@@ -30,11 +30,11 @@ Route::post('/register',[AuthController::class,'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
-// Vista para formulario de envío email de reseteo contraseña
-Route::get('/forgot-password', [AuthController::class, 'formularioRecuperarContrasenia'])->name('forgot-password');
+// Ruta para enviar email de reseteo contraseña
+Route::get('/recover-password', [AuthController::class, 'formularioRecuperarContrasenia'])->name('recover-password');
 
 // Función que se ejecuta al enviar el formulario y que enviará el email al usuario
-Route::post('/forgot-password', [AuthController::class, 'enviarRecuperarContrasenia'])->name('forgot-password');
+Route::post('/send-recover-password', [AuthController::class, 'enviarRecuperarContrasenia'])->name('send-recover-password');
 
 // Ruta para modificar contraseña
 Route::get('/reset-password/{token}', [AuthController::class, 'formularioActualizacion'])->name('reset-password');

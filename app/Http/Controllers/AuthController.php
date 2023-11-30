@@ -51,7 +51,7 @@ class AuthController extends Controller
 
     public function formularioRecuperarContrasenia()
     {
-        return view('forgot-password');
+        return view('auth.recover-password');
     }
 
     public function enviarRecuperarContrasenia(Request $request)
@@ -65,17 +65,17 @@ class AuthController extends Controller
         $token = Str::random(64);
 
         // Eliminamos la anterior reseteo de contraseña sin terminar
-        DB::table('password_resets')->where(['email' => $request->email])->delete();
+        DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
 
         // Creamos la solicitud de reseteo de contraseña
-        DB::table('password_resets')->insert([
+        DB::table('password_reset_tokens')->insert([
             'email' => $request->email,
             'token' => $token,
             'created_at' => Carbon::now()
         ]);
 
         // Enviamos el email de recuperación de contraseña
-        Mail::send('email.forgot-password', ['token' => $token], function ($message) use ($request) {
+        Mail::send('email.recuperar-contrasenia', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Recuperar Contraseña');
         });
@@ -98,7 +98,7 @@ class AuthController extends Controller
         ]);
 
         // Obtenemos el registro que contiene la solicitud de reseteo de contraseña
-        $updatePassword = DB::table('password_resets')
+        $updatePassword = DB::table('password_reset_tokens')
             ->where([
                 'email' => $request->email,
                 'token' => $request->token
@@ -116,7 +116,7 @@ class AuthController extends Controller
 
 
         // Eliminamos la solicitud
-        DB::table('password_resets')->where(['email' => $request->email])->delete();
+        DB::table('password_reset_tokens')->where(['email' => $request->email])->delete();
 
         // Devolvemos al formulario de login (devolvera un 404 puesto que no existe la ruta)
         return redirect('/login')->with('message', 'Tu contraseña se ha cambiado correctamente');
