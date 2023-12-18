@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Password;
 
 use App\Http\Controllers\CategoriaMotoLinealsController;
 use App\Http\Controllers\CategoriaMotoTaxesController;
@@ -31,7 +32,22 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 // Ruta para enviar email de reseteo contraseña
-Route::get('/recover-password', [AuthController::class, 'formularioRecuperarContrasenia'])->name('recover-password');
+//Route::get('/recover-password', [ForgotPasswordController::class, 'formularioRecuperarContrasenia'])->name('recover-password');
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+ 
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+ 
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+})->middleware('guest')->name('password.email');
 
 // Función que se ejecuta al enviar el formulario y que enviará el email al usuario
 Route::post('/send-recover-password', [AuthController::class, 'enviarRecuperarContrasenia'])->name('send-recover-password');
