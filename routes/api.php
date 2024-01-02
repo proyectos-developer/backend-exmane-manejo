@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Password;
 
-use App\Http\Controllers\CategoriaMotoLinealsController;
-use App\Http\Controllers\CategoriaMotoTaxesController;
-use App\Http\Controllers\CategoriaCamionesController;
-use App\Http\Controllers\CategoriaBusesController;
-use App\Http\Controllers\CategoriaCamionetasController;
-use App\Http\Controllers\EscuelaManejoController;
-use App\Http\Controllers\ClinicasController;
+use App\Http\Controllers\B2ACategoryController;
+use App\Http\Controllers\B2BCategoryController;
+use App\Http\Controllers\A2ACategoryController;
+use App\Http\Controllers\A3ACategoryController;
+use App\Http\Controllers\A3BCategoryController;
+use App\Http\Controllers\DrivingSchoolController;
+use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\ForgetPasswordManager;
 
 /**|--------------------------------------------------------------------------
@@ -63,53 +63,48 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria uno
-Route::get('/preguntas_categoria_uno', [CategoriaMotoLinealsController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
-Route::post('/preguntas_categoria_uno/store', [CategoriaMotoLinealsController::class, 'crear_pregunta'])->name('pregunta.crear_pregunta');
-Route::get('/preguntas_categoria_uno/{id}', [CategoriaMotoLinealsController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
-Route::get('/preguntas_categoria_uno/actualizar/{id}', [CategoriaMotoLinealsController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
-Route::delete('/preguntas_categoria_uno/eliminar/{id}', [CategoriaMotoLinealsController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+Route::get('/b2a_category', [B2ACategoryController::class, 'get_questions'])->name('question.get_questions');
+Route::post('/b2a_category/store', [B2ACategoryController::class, 'new_question'])->name('question.new_question');
+Route::get('/b2a_category/{id}', [B2ACategoryController::class, 'get_question'])->name('question.get_question');
+Route::get('/b2a_category/update/{id}', [B2ACategoryController::class, 'update_question'])->name('question.update_question');
+Route::delete('/b2a_category/delete/{id}', [B2ACategoryController::class, 'delete_question'])->name('question.delete_question');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria dos
-Route::get('/preguntas_categoria_dos', [CategoriaMototaxesController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
-Route::post('/preguntas_categoria_dos/store', [CategoriaMototaxesController::class, 'crear_pregunta'])->name('pregunta.crear_pregunta');
-Route::get('/preguntas_categoria_dos/{id}', [CategoriaMototaxesController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
-Route::get('/preguntas_categoria_dos/actualizar/{id}', [CategoriaMototaxesController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
-Route::delete('/preguntas_categoria_dos/eliminar/{id}', [CategoriaMototaxesController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+Route::get('/b2b_category', [B2BCategoryController::class, 'get_questions'])->name('question.get_questions');
+Route::post('/b2b_category/store', [B2BCategoryController::class, 'new_question'])->name('question.new_question');
+Route::get('/b2b_category/{id}', [B2BCategoryController::class, 'get_question'])->name('question.get_question');
+Route::get('/b2b_category/update/{id}', [B2BCategoryController::class, 'update_question'])->name('question.update_question');
+Route::delete('/b2b_category/delete/{id}', [B2BCategoryController::class, 'delete_question'])->name('question.delete_question');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria tres
-Route::get('/preguntas_categoria_tres', [CategoriaCamionesController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
-Route::post('/preguntas_categoria_tres/store', [CategoriaCamionesController::class, 'crear_pregunta'])->name('pregunta.crear_pregunta');
-Route::get('/preguntas_categoria_tres/{id}', [CategoriaCamionesController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
-Route::get('/preguntas_categoria_tres/actualizar/{id}', [CategoriaCamionesController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
-Route::delete('/preguntas_categoria_tres/eliminar/{id}', [CategoriaCamionesController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+Route::get('/a2a_category', [A2ACategoryController::class, 'get_questions'])->name('question.get_questions');
+Route::post('/a2a_category/store', [A2ACategoryController::class, 'new_question'])->name('question.new_question');
+Route::get('/a2a_category/{id}', [A2ACategoryController::class, 'get_question'])->name('question.get_question');
+Route::get('/a2a_category/update/{id}', [A2ACategoryController::class, 'update_question'])->name('question.update_question');
+Route::delete('/a2a_category/delete/{id}', [A2ACategoryController::class, 'delete_question'])->name('question.delete_question');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria cuatro
-Route::get('/preguntas_categoria_cuatro', [CategoriaBusesController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
-Route::post('/preguntas_categoria_cuatro/store', [CategoriaBusesController::class, 'crear_pregunta'])->name('pregunta.crear_pregunta');
-Route::get('/preguntas_categoria_cuatro/{id}', [CategoriaBusesController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
-Route::get('/preguntas_categoria_cuatro/actualizar/{id}', [CategoriaBusesController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
-Route::delete('/preguntas_categoria_cuatro/eliminar/{id}', [CategoriaBusesController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+Route::get('/a3a_category', [A3ACategoryController::class, 'get_questions'])->name('question.get_questions');
+Route::post('/a3a_category/store', [A3ACategoryController::class, 'new_question'])->name('question.new_question');
+Route::get('/a3a_category/{id}', [A3ACategoryController::class, 'get_question'])->name('question.get_question');
+Route::get('/a3a_category/update/{id}', [A3ACategoryController::class, 'update_question'])->name('question.update_question');
+Route::delete('/a3a_category/delete/{id}', [A3ACategoryController::class, 'delete_question'])->name('question.delete_question');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria cinco
-Route::get('/preguntas_categoria_cinco', [CategoriaCamionetasController::class, 'obtener_preguntas'])->name('pregunta.obtener_preguntas');
-Route::post('/preguntas_categoria_cinco/store', [CategoriaCamionetasController::class, 'crear_pregunta'])->name('pregunta.crear_pregunta');
-Route::get('/preguntas_categoria_cinco/{id}', [CategoriaCamionetasController::class, 'obtener_pregunta'])->name('pregunta.obtener_pregunta');
-Route::get('/preguntas_categoria_cinco/actualizar/{id}', [CategoriaCamionetasController::class, 'actualizar_pregunta'])->name('pregunta.actualizar_pregunta');
-Route::delete('/preguntas_categoria_cinco/eliminar/{id}', [CategoriaCamionetasController::class, 'eliminar_pregunta'])->name('pregunta.eliminar_pregunta');
+Route::get('/a3b_category', [A3BCategoryController::class, 'get_questions'])->name('question.get_questions');
+Route::post('/a3b_category/store', [A3BCategoryController::class, 'new_question'])->name('question.new_question');
+Route::get('/a3b_category/{id}', [A3BCategoryController::class, 'get_question'])->name('question.get_question');
+Route::get('/a3b_category/update/{id}', [A3BCategoryController::class, 'update_question'])->name('question.update_question');
+Route::delete('/a3b_category/delete/{id}', [A3BCategoryController::class, 'delete_question'])->name('question.delete_question');
 
 /**Ruta para guardar, actualizar y obtener lista de clinicas para exámen médico */
-Route::get('/clinicas', [ClinicasController::class, 'obtener_clinicas'])->name('clinica.obtener_clinicas');
-Route::post('/clinica/store', [ClinicasController::class, 'crear_clinica'])->name('clinica.crear_clinica');
-Route::get('/clinica/actualizar/{id}', [ClinicasController::class, 'actualizar_clinica'])->name('clinica.actualizar_clinica');
-Route::get('/clinicas/search/{search}', [ClinicasController::class, 'buscar_por_distrito'])->name('clinica.buscar_por_distrito');
+Route::get('/clinics', [ClinicController::class, 'get_clinics'])->name('clinic.get_clinics');
+Route::post('/clinic/store', [ClinicController::class, 'new_clinic'])->name('clinic.new_clinic');
+Route::get('/clinic/update/{id}', [ClinicController::class, 'update_clinic'])->name('clinic.update_clinic');
+Route::get('/clinics/search/{search}', [ClinicController::class, 'search_clinic'])->name('clinic.search_clinic');
 
 /**Ruta para guardar, actualizar y obtener lista de clinicas para escuelas de manejo */
-Route::get('/escuelas_manejo', [EscuelaManejoController::class, 'obtener_escuelas_manejo'])->name('escuelas.obtener_escuelas_manejo');
-Route::post('/escuelas_manejo/store', [EscuelaManejoController::class, 'crear_escuela_manejo'])->name('escuelas.crear_escuela_manejo');
-Route::get('/escuelas_manejo/actualizar/{id}', [EscuelaManejoController::class, 'actualizar_escuela_manejo'])->name('escuelas.actualizar_escuela_manejo');
-Route::get('/escuelas_manejo/search/{search}', [EscuelaManejoController::class, 'buscar_por_distrito'])->name('escuelas.buscar_por_distrito');
-
-/**Ruta para guardar respuesta */
-Route::post('/respuesta/store', [RespuestasUsuariosController::class, 'crear_respuesta'])->name('respuesta.crear_respuesta');
-Route::get('/respuesta/{id}', [RespuestasUsuariosController::class, 'obtener_respuesta'])->name('respuesta.obtener_respuesta');
-Route::get('/respuesta/actualizar/{id}/{respuesta_usuario}/{correcta_usuario}', [RespuestasUsuariosController::class, 'actualizar_respuestas'])->name('respuesta.actualizar_respuestas');
+Route::get('/driving_school', [DrivingSchoolController::class, 'get_driving_schools'])->name('driving_school.get_driving_schools');
+Route::post('/driving_school/store', [DrivingSchoolController::class, 'new_driving_school'])->name('driving_school.new_driving_school');
+Route::get('/driving_school/update/{id}', [DrivingSchoolController::class, 'update_driving_school'])->name('driving_school.update_driving_school');
+Route::get('/driving_school/search/{search}', [DrivingSchoolController::class, 'search_driving_school'])->name('driving_school.search_driving_school');

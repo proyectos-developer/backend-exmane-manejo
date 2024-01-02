@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('escuelas_manejos', function (Blueprint $table) {
+        Schema::create('driving_school_category', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');        //nombre
-            $table->text('logo');            //logo url
-            $table->double('costo');         //costo de la escuela de manejo
-            $table->text('telefono');        //número de teléfono
-            $table->text('ubicacion');        //número de teléfono
+            $table->text('name');         //clinic name
+            $table->string('logo');       //url logo
+            $table->text('cost');         //cost
+            $table->text('phone_number'); //phone number
+            $table->text('location');     //loction
             $table->timestamps();
         });
     }
@@ -31,6 +31,5 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('escuelas_manejos');
-    }
+        Schema::dropIfExists('driving_school_category');    }
 };
