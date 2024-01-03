@@ -122,9 +122,14 @@ class AuthController extends Controller
         return redirect('/login')->with('message', 'Tu contraseña se ha cambiado correctamente');
     }
 
-    public function obtener_usuario($email)
+    public function update_user(Request $request, $id)
     {
-        $usuario = User::where('email', '=', $email)->first();
-        return(compact('usuario'));
+        $user = User::find($id);
+
+        $user->name         = $request->post('name');
+
+        $user->save();
+
+        return (compact("user"));
     }
 }

@@ -58,9 +58,13 @@ Route::get('/reset-password/{token}', [AuthController::class, 'formularioActuali
 // Ruta para actualizar contraseña
 Route::post('/update-password', [AuthController::class, 'actualizarContrasenia'])->name('update-password');
 
+//Ruta para obtener datos usuario
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Ruta para actualizar contraseña
+Route::get('/user/{id}', [AuthController::class, 'update_user'])->name('user.update_user');
 
 //Ruta para obtener preguntas, guardar nueva pregunta, obtener una pregunta, actualizar pregunta, eliminar pregunta en cuestionario categoria uno
 Route::get('/b2a_category', [B2ACategoryController::class, 'get_questions'])->name('question.get_questions');
